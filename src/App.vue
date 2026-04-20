@@ -1,15 +1,22 @@
 <script setup>
 import { useAuthenticationStore } from '@/stores/authentication';
+import { useRouter } from 'vue-router';
 
-// 로그인 상태에 따라 헤더 메뉴를 다르게 보여주기 위해 store 가져오기
 const authenticationStore = useAuthenticationStore();
+const router = useRouter();
+
+// 로그아웃 처리 후 로그인 페이지로 이동
+const handleSignout = async () => {
+  await authenticationStore.authSignout();
+  router.push('/signin');
+};
 </script>
 
 <template>
   <div>
     <header class="header">
       <div class="header-inner">
-        <router-link to="/" class="logo">🍱 Green Eats</router-link>
+        <router-link to="/" class="logo">Green Eats</router-link>
         <nav class="nav">
           <!-- 비로그인 상태일 때 -->
           <template v-if="!authenticationStore.state.isSigned">
@@ -18,7 +25,9 @@ const authenticationStore = useAuthenticationStore();
           </template>
           <!-- 로그인 상태일 때 -->
           <template v-else>
+            <span class="user-name">{{ authenticationStore.state.signedUser?.name }}님</span>
             <router-link to="/menu/add" class="nav-link">메뉴등록</router-link>
+            <button class="signout-btn" @click="handleSignout">로그아웃</button>
           </template>
         </nav>
       </div>
@@ -71,6 +80,7 @@ body {
 
 .nav {
   display: flex;
+  align-items: center;
   gap: 16px;
 }
 
@@ -84,6 +94,26 @@ body {
 }
 
 .nav-link:hover {
+  background-color: rgba(255,255,255,0.15);
+}
+
+.user-name {
+  color: #d8f3dc;
+  font-size: 14px;
+}
+
+.signout-btn {
+  background-color: transparent;
+  color: #d8f3dc;
+  border: 1px solid #d8f3dc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.signout-btn:hover {
   background-color: rgba(255,255,255,0.15);
 }
 
