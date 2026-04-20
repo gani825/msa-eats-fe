@@ -1,23 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import SignIn from '@/views/Signin.vue'
+import Home from '@/views/Home.vue'
+import Order from '@/views/Order.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
-    },
-  ],
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
+        { path: '/', component: Home }, // 메인 메뉴판
+        { path: '/signin', component: SignIn }, // 로그인
+        { path: '/signup', component: () => import('@/views/Signup.vue') },  // 회원가입 (지연 로딩)
+        { path: '/menu/add', component: () => import('@/views/MenuAdd.vue') }, // 메뉴 등록 (지연 로딩)
+        { path: '/order', component: Order }, // 주문 확인
+    ],
 })
 
 export default router
