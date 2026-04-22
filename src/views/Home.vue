@@ -2,134 +2,236 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { getMenuList } from '@/api/storeService';
-import { useOrderMenuStore } from '@/stores/orderMenuStore';
+import { useAuthenticationStore } from '@/stores/authentication';
+import { useCartStore } from '@/stores/cart'; // orderMenuStore → cartStore로 변경
 
+const authenticationStore = useAuthenticationStore();
 const router = useRouter();
 const menus = ref([]);
-const orderMenuStore = useOrderMenuStore();
+const cartStore = useCartStore();
 
-// 메뉴 목록 조회 (Gateway → Store Service)
 const fetchMenus = async () => {
   const res = await getMenuList();
   menus.value = res.resultData;
 };
 
-// 선택한 메뉴를 store에 저장 후 주문 페이지로 이동
-const goToOrder = (menu) => {
-  orderMenuStore.setOrderMenu({
-    menuId: menu.id,
-    name: menu.name,
-    price: menu.price,
-    stockQuantity: menu.stockQuantity
-  });
-  router.push('/order');
+// 장바구니 담기 (기존: 바로 주문 페이지 이동 → 변경: 카트에 추가 후 수량 누적)
+const addToCart = (menu) => {
+  cartStore.addToCart(menu);
 };
 
 onMounted(fetchMenus);
 </script>
 
 <template>
-  <div>
-    <h1 class="page-title">오늘의 메뉴</h1>
-    <div class="menu-grid">
-      <div v-for="menu in menus" :key="menu.id" class="menu-card">
-        <div class="menu-category">{{ menu.menuCategory }}</div>
-        <h3 class="menu-name">{{ menu.name }}</h3>
-        <p class="menu-price">{{ menu.price.toLocaleString() }}원</p>
-        <p class="menu-stock">남은 수량: {{ menu.stockQuantity }}개</p>
-        <button
-            class="order-btn"
-            @click="goToOrder(menu)"
-            :disabled="menu.stockQuantity === 0"
-        >
-          {{ menu.stockQuantity === 0 ? '품절' : '주문하기' }}
-        </button>
+  <div class="fg-wrap">
+    <div class="fg-top">
+      <span class="fg-user-name">안녕하세요 {{ authenticationStore.state.signedUser?.name }}님</span>
+      <p class="fg-desc">오늘 뭐 먹지? 지금 바로 주문해요 🍽</p>
+    </div>
+
+    <!-- 장바구니에 담긴 항목이 있으면 주문 바로가기 표시 -->
+    <div v-if="cartStore.totalCount > 0" class="cart-summary">
+      <span>현재 {{ cartStore.totalCount }}개 담김 · {{ cartStore.totalAmount.toLocaleString() }}원</span>
+      <button @click="router.push('/order')">주문하러 가기 →</button>
+    </div>
+
+    <div class="fg-grid">
+      <div
+          v-for="menu in menus"
+          :key="menu.id"
+          class="fg-card"
+          :class="{ 'fg-sold-out': menu.stockQuantity === 0 }"
+      >
+        <div class="fg-thumb">
+          <span class="fg-emoji">🍱</span>
+          <span v-if="menu.stockQuantity === 0" class="fg-badge-sold">품절</span>
+          <span v-else-if="menu.stockQuantity <= 3" class="fg-badge-low">마감임박</span>
+        </div>
+        <div class="fg-info">
+          <span class="fg-cat">{{ menu.menuCategory }}</span>
+          <h3 class="fg-name">{{ menu.name }}</h3>
+          <div class="fg-bottom">
+            <span class="fg-price">{{ menu.price.toLocaleString() }}원</span>
+            <span class="fg-stock">{{ menu.stockQuantity }}개 남음</span>
+          </div>
+          <!-- 품절이 아닐 때만 담기 버튼 표시 -->
+          <button
+              v-if="menu.stockQuantity > 0"
+              class="fg-add-btn"
+              @click="addToCart(menu)"
+          >
+            + 담기
+          </button>
+        </div>
       </div>
     </div>
-    <p v-if="menus.length === 0" class="empty-msg">등록된 메뉴가 없습니다.</p>
+
+    <p v-if="menus.length === 0" class="fg-empty">메뉴가 없어요.</p>
   </div>
 </template>
 
 <style scoped>
-.page-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2d6a4f;
-  margin-bottom: 24px;
+.fg-wrap {
+  padding: 4px 0 35px;
 }
 
-.menu-grid {
+.fg-top {
+  margin-bottom: 32px;
+}
+
+.fg-user-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #FF4D4F;
+}
+
+.fg-desc {
+  margin-top: 6px;
+  font-size: 16px;
+  color: #777;
+}
+
+/* 장바구니 요약 바 */
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff4ec;
+  border: 1.5px solid #ff6b35;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ff6b35;
+}
+
+.cart-summary button {
+  background: #ff6b35;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.fg-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   gap: 20px;
 }
 
-.menu-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+.fg-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  border: 1.5px solid #ebebeb;
+}
+
+.fg-card:hover:not(.fg-sold-out) {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.fg-sold-out {
+  opacity: 0.45;
+}
+
+.fg-thumb {
+  background: #f7f3ee;
+  height: 110px;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: transform 0.2s;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.menu-card:hover {
-  transform: translateY(-3px);
+.fg-emoji {
+  font-size: 48px;
 }
 
-.menu-category {
-  font-size: 12px;
-  color: #888;
-  background: #f0f0f0;
+.fg-badge-sold {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #333;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
   padding: 2px 8px;
   border-radius: 20px;
-  width: fit-content;
 }
 
-.menu-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: #1b4332;
+.fg-badge-low {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff6b35;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
 }
 
-.menu-price {
-  font-size: 16px;
-  color: #2d6a4f;
-  font-weight: 600;
+.fg-info {
+  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.menu-stock {
-  font-size: 13px;
-  color: #999;
+.fg-cat {
+  font-size: 11px;
+  color: #ff6b35;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
 }
 
-.order-btn {
-  margin-top: 8px;
-  padding: 10px;
-  background-color: #2d6a4f;
-  color: white;
-  border: none;
-  border-radius: 8px;
+.fg-name {
   font-size: 15px;
-  cursor: pointer;
-  transition: background 0.2s;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.3;
 }
 
-.order-btn:hover:not(:disabled) {
-  background-color: #1b4332;
+.fg-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
 }
 
-.order-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.empty-msg {
-  text-align: center;
-  color: #aaa;
-  margin-top: 60px;
+.fg-price {
   font-size: 16px;
+  font-weight: 700;
+  color: #333;
+}
+
+.fg-stock {
+  font-size: 11px;
+  color: #bbb;
+}
+
+.fg-add-btn {
+  margin-top: 8px;
+  padding: 7px;
+  background: #ff6b35;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.fg-empty {
+  text-align: center;
+  color: #ccc;
+  margin-top: 80px;
+  font-size: 15px;
 }
 </style>
