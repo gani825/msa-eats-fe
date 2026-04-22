@@ -100,7 +100,7 @@ const handleSignup = async () => {
 
 h2 {
   text-align: center;
-  color: #2d6a4f;
+  color: #333;
   margin-bottom: 8px;
 }
 
@@ -126,22 +126,18 @@ input {
 }
 
 input:focus {
-  border-color: #2d6a4f;
+  border-color: #FF4D4F;
 }
 
 button {
   padding: 12px;
-  background-color: #2d6a4f;
+  background-color: #FF4D4F;
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   transition: background 0.2s;
-}
-
-button:hover:not(:disabled) {
-  background-color: #1b4332;
 }
 
 button:disabled {
@@ -161,7 +157,7 @@ button:disabled {
 }
 
 .link-text a {
-  color: #2d6a4f;
+  color: #FF4D4F;
   font-weight: bold;
 }
 </style>

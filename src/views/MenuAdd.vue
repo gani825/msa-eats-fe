@@ -83,7 +83,7 @@ const submit = async () => {
 .page-title {
   font-size: 22px;
   font-weight: bold;
-  color: #2d6a4f;
+  color: #FF4D4F;
   margin-bottom: 20px;
 }
 
@@ -119,12 +119,12 @@ input, select {
 }
 
 input:focus, select:focus {
-  border-color: #2d6a4f;
+  border-color: #FF4D4F;
 }
 
 .submit-btn {
   padding: 14px;
-  background-color: #2d6a4f;
+  background-color: #FF4D4F;
   color: white;
   border: none;
   border-radius: 8px;
