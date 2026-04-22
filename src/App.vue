@@ -16,7 +16,7 @@ const handleSignout = async () => {
   <div>
     <header class="header">
       <div class="header-inner">
-        <router-link to="/" class="logo">Green Eats</router-link>
+        <router-link to="/" class="logo">Food Grid</router-link>
         <nav class="nav">
           <!-- 비로그인 상태일 때 -->
           <template v-if="!authenticationStore.state.isSigned">
@@ -25,7 +25,7 @@ const handleSignout = async () => {
           </template>
           <!-- 로그인 상태일 때 -->
           <template v-else>
-            <span class="user-name">{{ authenticationStore.state.signedUser?.name }}님</span>
+            <router-link to="/order/list" class="nav-link">주문내역</router-link>
             <router-link to="/menu/add" class="nav-link">메뉴등록</router-link>
             <button class="signout-btn" @click="handleSignout">로그아웃</button>
           </template>
@@ -48,18 +48,17 @@ const handleSignout = async () => {
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f8f8f6;
   color: #333;
 }
 
 .header {
-  background-color: #2d6a4f;
+  background-color: #fff;
   padding: 0 24px;
   height: 60px;
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 0 #fff;
 }
 
 .header-inner {
@@ -72,10 +71,11 @@ body {
 }
 
 .logo {
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
+  color: #FF4D4F;
+  font-size: 22px;
+  font-weight: 900;
   text-decoration: none;
+  letter-spacing: -0.5px;
 }
 
 .nav {
@@ -85,27 +85,28 @@ body {
 }
 
 .nav-link {
-  color: #d8f3dc;
+  color: #FF4D4F;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 500;
   padding: 6px 12px;
   border-radius: 6px;
-  transition: background 0.2s;
+  transition: color 0.2s;
 }
 
 .nav-link:hover {
-  background-color: rgba(255,255,255,0.15);
+  color: #ff373d;
 }
 
 .user-name {
-  color: #d8f3dc;
+  color: #FF4D4F;
   font-size: 14px;
 }
 
 .signout-btn {
   background-color: transparent;
-  color: #d8f3dc;
-  border: 1px solid #d8f3dc;
+  color: #FF4D4F;
+  border: 1px solid #FF4D4F;
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 14px;
@@ -113,13 +114,9 @@ body {
   transition: all 0.2s;
 }
 
-.signout-btn:hover {
-  background-color: rgba(255,255,255,0.15);
-}
-
 .main-content {
   max-width: 1000px;
-  margin: 40px auto;
+  margin: 26px auto;
   padding: 0 24px;
 }
 </style>
