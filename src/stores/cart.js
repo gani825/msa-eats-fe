@@ -21,7 +21,7 @@ export const useCartStore = defineStore('cart', () => {
         if (existing) {
             existing.quantity++;
         } else {
-            state.items.push({ menuId: menu.id, quantity: 1, price: menu.price });
+            state.items.push({ menuId: menu.id, name: menu.name, quantity: 1, price: menu.price });
         }
     }
 
