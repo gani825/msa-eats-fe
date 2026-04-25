@@ -15,7 +15,7 @@ const fetchMenus = async () => {
   menus.value = res.resultData;
 };
 
-// 장바구니 담기 (기존: 바로 주문 페이지 이동 → 변경: 카트에 추가 후 수량 누적)
+// 장바구니 담기 (기존: 바로 주문 페이지 이동 -> 변경: 카트에 추가 후 수량 누적)
 const addToCart = (menu) => {
   cartStore.addToCart(menu);
 };
@@ -83,13 +83,13 @@ onMounted(fetchMenus);
 .fg-user-name {
   font-size: 20px;
   font-weight: 700;
-  color: #FF4D4F;
+  color: var(--color-primary);
 }
 
 .fg-desc {
   margin-top: 6px;
   font-size: 16px;
-  color: #777;
+  color: var(--color-text-light);
 }
 
 /* 장바구니 요약 바 */
@@ -97,18 +97,18 @@ onMounted(fetchMenus);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff4ec;
-  border: 1.5px solid #ff6b35;
+  background: var(--color-secondary-bg);
+  border: 1.5px solid var(--color-secondary);
   border-radius: 10px;
   padding: 12px 18px;
   margin-bottom: 20px;
   font-size: 14px;
   font-weight: 600;
-  color: #ff6b35;
+  color: var(--color-secondary);
 }
 
 .cart-summary button {
-  background: #ff6b35;
+  background: var(--color-secondary);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -127,8 +127,8 @@ onMounted(fetchMenus);
 .fg-card {
   border-radius: 14px;
   overflow: hidden;
-  background: #fff;
-  border: 1.5px solid #ebebeb;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
 }
 
 .fg-card:hover:not(.fg-sold-out) {
@@ -156,7 +156,7 @@ onMounted(fetchMenus);
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #333;
+  background: var(--color-text-base);
   color: #fff;
   font-size: 11px;
   font-weight: 700;
@@ -168,7 +168,7 @@ onMounted(fetchMenus);
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #ff6b35;
+  background: var(--color-secondary);
   color: #fff;
   font-size: 11px;
   font-weight: 700;
@@ -185,7 +185,7 @@ onMounted(fetchMenus);
 
 .fg-cat {
   font-size: 11px;
-  color: #ff6b35;
+  color: var(--color-secondary);
   font-weight: 700;
   letter-spacing: 0.3px;
   text-transform: uppercase;
@@ -194,7 +194,7 @@ onMounted(fetchMenus);
 .fg-name {
   font-size: 15px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-base);
   line-height: 1.3;
 }
 
@@ -208,18 +208,18 @@ onMounted(fetchMenus);
 .fg-price {
   font-size: 16px;
   font-weight: 700;
-  color: #333;
+  color: var(--color-text-base);
 }
 
 .fg-stock {
   font-size: 11px;
-  color: #bbb;
+  color: var(--color-text-muted);
 }
 
 .fg-add-btn {
   margin-top: 8px;
   padding: 7px;
-  background: #ff6b35;
+  background: var(--color-primary);
   color: #fff;
   border: none;
   border-radius: 7px;
@@ -230,7 +230,7 @@ onMounted(fetchMenus);
 
 .fg-empty {
   text-align: center;
-  color: #ccc;
+  color: var(--color-text-muted);
   margin-top: 80px;
   font-size: 15px;
 }

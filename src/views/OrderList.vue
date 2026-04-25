@@ -1,7 +1,7 @@
 <script setup>
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useOrderStore } from '@/stores/order';
+import {onMounted} from 'vue';
+import {useRouter} from 'vue-router';
+import {useOrderStore} from '@/stores/order';
 
 const router = useRouter();
 const orderStore = useOrderStore();
@@ -15,7 +15,7 @@ onMounted(() => {
 
 // 주문 카드 클릭 시 상세 페이지로 이동
 const goToDetail = (orderId) => {
-  router.push({ name: 'OrderDetail', params: { orderId } });
+  router.push({name: 'OrderDetail', params: {orderId}});
 };
 </script>
 
@@ -35,9 +35,9 @@ const goToDetail = (orderId) => {
           @click="goToDetail(order.orderId)"
       >
         <div class="ol-card-header">
-          <span class="ol-status" :class="order.status?.toLowerCase()">
-            {{ order.status === 'PENDING' ? '주문 완료' : order.status === 'COMPLETED' ? '처리 완료' : '취소됨' }}
-          </span>
+          <span class="ol-status" :class="{ pending: order.status === '주문대기', completed: order.status === '주문완료', cancelled: order.status === '주문취소'}">
+            {{ order.status }}
+        </span>
           <span class="ol-total">{{ order.totalAmount?.toLocaleString() }}원</span>
         </div>
         <div class="ol-user">{{ order.userName }} 님의 주문 · #{{ order.orderId }}</div>
@@ -74,14 +74,14 @@ const goToDetail = (orderId) => {
 .ol-title {
   font-size: 26px;
   font-weight: 900;
-  color: #333;
+  color: var(--color-text-base);
   letter-spacing: -0.5px;
 }
 
 .ol-desc {
   margin-top: 6px;
   font-size: 13px;
-  color: #999;
+  color: var(--color-text-light);
 }
 
 .ol-list {
@@ -91,9 +91,9 @@ const goToDetail = (orderId) => {
 }
 
 .ol-card {
-  background: #fff;
+  background: var(--color-surface);
   border-radius: 14px;
-  border: 1.5px solid #ebebeb;
+  border: 1.5px solid var(--color-border);
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
@@ -118,33 +118,33 @@ const goToDetail = (orderId) => {
   padding: 3px 10px;
   border-radius: 20px;
   background: #f0f0f0;
-  color: #555;
+  color: var(--color-text-sub);
 }
 
 .ol-status.pending {
-  background: #fff4ec;
-  color: #ff6b35;
+  background: var(--color-secondary-bg);
+  color: var(--color-secondary);
 }
 
 .ol-status.completed {
-  background: #edf7f0;
-  color: #2d6a4f;
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
 }
 
 .ol-status.cancelled {
   background: #f5f5f5;
-  color: #aaa;
+  color: var(--color-text-muted);
 }
 
 .ol-total {
   font-size: 18px;
   font-weight: 900;
-  color: #333;
+  color: var(--color-text-base);
 }
 
 .ol-user {
   font-size: 13px;
-  color: #aaa;
+  color: var(--color-text-muted);
 }
 
 .ol-footer {
@@ -155,22 +155,22 @@ const goToDetail = (orderId) => {
 
 .ol-more-btn {
   padding: 10px 24px;
-  background: #fff;
-  border: 1.5px solid #ebebeb;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
   border-radius: 8px;
-  color: #555;
+  color: var(--color-text-sub);
   font-size: 14px;
   cursor: pointer;
 }
 
 .ol-more-btn:disabled {
-  color: #ccc;
+  color: var(--color-text-muted);
   cursor: not-allowed;
 }
 
 .ol-empty {
   text-align: center;
-  color: #ccc;
+  color: var(--color-text-muted);
   margin-top: 80px;
   font-size: 15px;
 }

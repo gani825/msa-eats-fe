@@ -48,17 +48,17 @@ const handleSignout = async () => {
 }
 
 body {
-  background-color: #f8f8f6;
-  color: #333;
+  background-color: var(--color-bg);
+  color: var(--color-text-base);
 }
 
 .header {
-  background-color: #fff;
+  background-color: var(--color-surface);
   padding: 0 24px;
   height: 60px;
   display: flex;
   align-items: center;
-  box-shadow: 0 1px 0 #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
 .header-inner {
@@ -71,7 +71,7 @@ body {
 }
 
 .logo {
-  color: #FF4D4F;
+  color: var(--color-primary);
   font-size: 22px;
   font-weight: 900;
   text-decoration: none;
@@ -85,7 +85,7 @@ body {
 }
 
 .nav-link {
-  color: #FF4D4F;
+  color: var(--color-text-sub);
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -95,18 +95,18 @@ body {
 }
 
 .nav-link:hover {
-  color: #ff373d;
+  color: var(--color-primary);
 }
 
 .user-name {
-  color: #FF4D4F;
+  color: var(--color-primary);
   font-size: 14px;
 }
 
 .signout-btn {
   background-color: transparent;
-  color: #FF4D4F;
-  border: 1px solid #FF4D4F;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 14px;

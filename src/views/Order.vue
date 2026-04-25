@@ -23,7 +23,7 @@ const { isSubmitting, submitOrder } = useOrder();
     <div class="order-card" v-else>
       <div v-for="item in cartStore.state.items" :key="item.menuId" class="order-item">
         <div class="item-info">
-          <span class="item-name">메뉴 ID: {{ item.menuId }}</span>
+          <span class="item-name">{{ item.name }}</span>
           <span class="item-price">{{ item.price.toLocaleString() }}원</span>
         </div>
         <div class="item-controls">
@@ -64,12 +64,12 @@ const { isSubmitting, submitOrder } = useOrder();
 .page-title {
   font-size: 22px;
   font-weight: bold;
-  color: #FF4D4F;
+  color: var(--color-primary);
   margin-bottom: 20px;
 }
 
 .order-card {
-  background: white;
+  background: var(--color-surface);
   border-radius: 12px;
   padding: 28px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -83,7 +83,7 @@ const { isSubmitting, submitOrder } = useOrder();
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .item-info {
@@ -94,12 +94,12 @@ const { isSubmitting, submitOrder } = useOrder();
 
 .item-name {
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-base);
 }
 
 .item-price {
   font-size: 14px;
-  color: #888;
+  color: var(--color-text-light);
 }
 
 .item-controls {
@@ -111,7 +111,7 @@ const { isSubmitting, submitOrder } = useOrder();
 .item-controls input {
   width: 60px;
   padding: 6px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   text-align: center;
   font-size: 15px;
@@ -120,15 +120,15 @@ const { isSubmitting, submitOrder } = useOrder();
 .remove-btn {
   padding: 6px 10px;
   background: transparent;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
-  color: #999;
+  color: var(--color-text-light);
   cursor: pointer;
   font-size: 12px;
 }
 
 .divider {
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--color-border);
 }
 
 .total-section {
@@ -137,17 +137,18 @@ const { isSubmitting, submitOrder } = useOrder();
   align-items: center;
   font-size: 16px;
   font-weight: 600;
+  color: var(--color-text-base);
 }
 
 .total-price {
   font-size: 20px;
-  color: #FF4D4F;
+  color: var(--color-primary);
   font-weight: bold;
 }
 
 .order-btn {
   padding: 14px;
-  background-color: #FF4D4F;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -157,34 +158,34 @@ const { isSubmitting, submitOrder } = useOrder();
 }
 
 .order-btn:disabled {
-  background-color: #ccc;
+  background-color: var(--color-disabled);
   cursor: not-allowed;
 }
 
 .back-btn {
   padding: 10px;
   background-color: transparent;
-  color: #888;
-  border: 1px solid #ddd;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
 }
 
 .back-btn:hover {
-  background-color: #f5f5f5;
+  background-color: var(--color-bg);
 }
 
 .empty-state {
   text-align: center;
   margin-top: 80px;
-  color: #aaa;
+  color: var(--color-text-light);
 }
 
 .empty-state button {
   margin-top: 16px;
   padding: 10px 20px;
-  background-color: #FF4D4F;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;

@@ -80,7 +80,7 @@ onMounted(async () => {
 .back-btn {
   background: transparent;
   border: none;
-  color: #ff6b35;
+  color: var(--color-secondary);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -91,27 +91,27 @@ onMounted(async () => {
 .detail-title {
   font-size: 26px;
   font-weight: 900;
-  color: #333;
+  color: var(--color-text-base);
   letter-spacing: -0.5px;
 }
 
 .detail-desc {
   margin-top: 6px;
   font-size: 13px;
-  color: #999;
+  color: var(--color-text-light);
 }
 
 .detail-loading {
   text-align: center;
-  color: #ccc;
+  color: var(--color-text-muted);
   margin-top: 80px;
   font-size: 15px;
 }
 
 .detail-card {
-  background: #fff;
+  background: var(--color-surface);
   border-radius: 14px;
-  border: 1.5px solid #ebebeb;
+  border: 1.5px solid var(--color-border);
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
@@ -123,7 +123,7 @@ onMounted(async () => {
   justify-content: space-between;
   align-items: center;
   padding: 14px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .detail-item-left {
@@ -139,7 +139,7 @@ onMounted(async () => {
 .detail-name {
   font-size: 15px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-base);
 }
 
 .detail-item-right {
@@ -151,13 +151,13 @@ onMounted(async () => {
 
 .detail-qty {
   font-size: 12px;
-  color: #aaa;
+  color: var(--color-text-muted);
 }
 
 .detail-price {
   font-size: 15px;
   font-weight: 700;
-  color: #333;
+  color: var(--color-text-base);
 }
 
 .detail-total {
@@ -168,18 +168,18 @@ onMounted(async () => {
   margin-top: 4px;
   font-size: 15px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-base);
 }
 
 .detail-total-price {
   font-size: 20px;
   font-weight: 900;
-  color: #FF4D4F;
+  color: var(--color-primary);
 }
 
 .detail-empty {
   text-align: center;
-  color: #ccc;
+  color: var(--color-text-muted);
   margin-top: 80px;
   font-size: 15px;
 }

@@ -87,7 +87,7 @@ const handleSignup = async () => {
 }
 
 .auth-card {
-  background: white;
+  background: var(--color-surface);
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -100,7 +100,7 @@ const handleSignup = async () => {
 
 h2 {
   text-align: center;
-  color: #333;
+  color: var(--color-text-base);
   margin-bottom: 8px;
 }
 
@@ -113,12 +113,12 @@ h2 {
 .form-group label {
   font-weight: 600;
   font-size: 14px;
-  color: #444;
+  color: var(--color-text-sub);
 }
 
 input {
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 15px;
   outline: none;
@@ -126,12 +126,12 @@ input {
 }
 
 input:focus {
-  border-color: #FF4D4F;
+  border-color: var(--color-primary);
 }
 
 button {
   padding: 12px;
-  background-color: #FF4D4F;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -141,23 +141,23 @@ button {
 }
 
 button:disabled {
-  background-color: #ccc;
+  background-color: var(--color-disabled);
   cursor: not-allowed;
 }
 
 .error-msg {
-  color: #e63946;
+  color: var(--color-primary);
   font-size: 13px;
 }
 
 .link-text {
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-light);
 }
 
 .link-text a {
-  color: #FF4D4F;
+  color: var(--color-primary);
   font-weight: bold;
 }
 </style>

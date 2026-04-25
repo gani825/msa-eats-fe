@@ -83,12 +83,12 @@ const submit = async () => {
 .page-title {
   font-size: 22px;
   font-weight: bold;
-  color: #FF4D4F;
+  color: var(--color-primary);
   margin-bottom: 20px;
 }
 
 .form-card {
-  background: white;
+  background: var(--color-surface);
   border-radius: 12px;
   padding: 28px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -106,12 +106,12 @@ const submit = async () => {
 .form-group label {
   font-weight: 600;
   font-size: 14px;
-  color: #444;
+  color: var(--color-text-sub);
 }
 
 input, select {
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 15px;
   outline: none;
@@ -119,12 +119,12 @@ input, select {
 }
 
 input:focus, select:focus {
-  border-color: #FF4D4F;
+  border-color: var(--color-secondary);
 }
 
 .submit-btn {
   padding: 14px;
-  background-color: #FF4D4F;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -134,25 +134,25 @@ input:focus, select:focus {
 }
 
 .submit-btn:hover:not(:disabled) {
-  background-color: #1b4332;
+  background-color: var(--color-primary-hover);
 }
 
 .submit-btn:disabled {
-  background-color: #ccc;
+  background-color: var(--color-disabled);
   cursor: not-allowed;
 }
 
 .back-btn {
   padding: 10px;
   background-color: transparent;
-  color: #888;
-  border: 1px solid #ddd;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
 }
 
 .back-btn:hover {
-  background-color: #f5f5f5;
+  background-color: var(--color-bg);
 }
 </style>

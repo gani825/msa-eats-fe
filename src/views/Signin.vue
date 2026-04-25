@@ -43,7 +43,7 @@ const handleLogin = async () => {
 }
 
 .auth-card {
-  background: white;
+  background: var(--color-surface);
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -56,13 +56,13 @@ const handleLogin = async () => {
 
 h2 {
   text-align: center;
-  color: #FF4D4F;
+  color: var(--color-primary);
   margin-bottom: 8px;
 }
 
 input {
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 15px;
   outline: none;
@@ -70,12 +70,12 @@ input {
 }
 
 input:focus {
-  border-color: #FF4D4F;
+  border-color: var(--color-primary);
 }
 
 button {
   padding: 12px;
-  background-color: #FF4D4F;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -87,11 +87,11 @@ button {
 .link-text {
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-light);
 }
 
 .link-text a {
-  color: #FF4D4F;
+  color: var(--color-primary);
   font-weight: bold;
 }
 </style>
